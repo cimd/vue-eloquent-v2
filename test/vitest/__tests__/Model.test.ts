@@ -11,6 +11,8 @@ const model = {
 describe('model', () => {
   it('creates', async () => {
     const post = new Post(model)
+    console.log(post)
+    console.log(post.test)
 
     expect(post).toHaveProperty('id', 1)
     expect(post).toBeInstanceOf(Post)

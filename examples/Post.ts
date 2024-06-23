@@ -8,9 +8,16 @@ export default class Post extends Model<IPost> {
   created_at: string
   updated_at: string
 
+  static test = 'My Test'
+
+  static {
+    console.log('Class static initialization block called')
+  }
+
   constructor(post)
   {
     super()
+    console.log(this.test)
     super.factory(post)
   }
 }
