@@ -5,6 +5,7 @@ import ApiError from '../api/ApiError'
 import ApiQuery from '../api/ApiQuery'
 import { IAxiosError } from '@/api/IAxiosError'
 import Model from '@/model/Model'
+import { serializeModel } from '@/helpers/SerializeModel'
 
 export interface ApiConfig {
   serialize: boolean
@@ -12,6 +13,10 @@ export interface ApiConfig {
 }
 
 export default abstract class Api extends ApiQuery {
+
+  protected constructor(){
+    super()
+  }
 
   protected resource()
   {
@@ -72,10 +77,40 @@ export default abstract class Api extends ApiQuery {
     })
   }
 
+  /**
+   * Requests a single model from the API
+   *
+   * @async
+   * @static
+   * @template T
+   * @param { number } id - Model ID
+   * @return { Promise<any> } The data from the API
+   */
+  static show<T>(id: number): Promise<IApiResponse<T>>
+  {
+    const self = new this()
+    const url = _join([self.apiPrefix(), self.resource(), id], '/')
+    self.retrieving(id)
+    return new Promise((resolve, reject) => {
+      http
+        .get(url, {
+          transformResponse: [(data: any) => self.transformResponse(data)],
+        })
+        .then((response: { data: any }) => {
+          self.retrieved(response.data)
+          resolve(response.data)
+        })
+        .catch((err: any) => {
+          self.retrievingError(err)
+          reject(new ApiError('Show', err))
+        })
+    })
+  }
+
   protected transformResponse(response: string): any
   {
     const resp = JSON.parse(response)
-    // resp.data = formatObject(resp.data, this.dates)
+    resp.data = serializeModel(resp.data, this.model())
 
     return resp
   }

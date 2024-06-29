@@ -1,23 +1,29 @@
 import { Model } from '../src/index'
 import { IPost } from './PostInterface'
+import myCast from './MyCast'
 
 export default class Post extends Model<IPost> {
+  id!: number
+  title!: string
+  text!: string
+  author_id!: number
+  author!: string
+  created_at!: string
+  updated_at!: string
 
-  id: number
-  name: string
-  created_at: string
-  updated_at: string
-
-  static test = 'My Test'
-
-  static {
-    console.log('Class static initialization block called')
-  }
-
-  constructor(post)
+  constructor(post: IPost)
   {
     super()
-    console.log(this.test)
     super.factory(post)
+  }
+
+  protected casts() {
+    return {
+      id: 'number',
+      author: myCast,
+      created_at: 'date',
+      updated_at: 'date',
+      deleted_at: 'date',
+    }
   }
 }

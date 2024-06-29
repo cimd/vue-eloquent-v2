@@ -44,14 +44,13 @@ export default abstract class Model<T> {
 
   protected castTo(cast: string, key: string, value: any)
   {
-    // console.log(cast, key, value)
     switch (cast) {
     case 'date':
       return new Date(value)
     case 'number':
       return Number(value)
     default:
-      return value
+      return cast(this, key, value, this.casts())
     }
   }
 }

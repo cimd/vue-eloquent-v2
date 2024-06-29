@@ -1,12 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import PostApi from '../../../examples/PostApi'
-import { Api } from '../../../src/index.js'
+import Post from '../../../examples/Post.js'
 
 describe('model api', () => {
-  it('get method', async () => {
-    const api = await PostApi.get()
-    console.log(api)
+  it('get', async () => {
+    const post = await PostApi.get()
 
-    expect(api).toBeInstanceOf(Api)
+    expect(post.data[ 0 ]).toBeInstanceOf(Post)
+  })
+
+  it('show', async () => {
+    const post = await PostApi.show(1)
+
+    expect(post.data).toBeInstanceOf(Post)
   })
 })
