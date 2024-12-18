@@ -1,9 +1,9 @@
-import { IApiResponse } from '@/api/IApiResponse'
+import type { IApiResponse } from '@/api/IApiResponse'
 import { apiPrefix, http } from '../http/http'
 import _join from 'lodash/join'
 import ApiError from '../api/ApiError'
 import ApiQuery from '../api/ApiQuery'
-import { IAxiosError } from '@/api/IAxiosError'
+import type { IAxiosError } from '@/api/IAxiosError'
 import Model from '@/model/Model'
 import { serializeModel } from '@/helpers/SerializeModel'
 
@@ -13,48 +13,42 @@ export interface ApiConfig {
 }
 
 export default abstract class Api extends ApiQuery {
-
-  protected constructor(){
+  protected constructor() {
     super()
   }
 
-  protected resource()
-  {
+  protected resource() {
     return ''
   }
 
-  protected apiPrefix()
-  {
+  protected apiPrefix() {
     return apiPrefix
   }
 
-  protected model()
-  {
+  protected model() {
     return Model
   }
 
-  static config(params: ApiConfig): this
-  {
+  static config(params: ApiConfig): this {
     const self = new this()
     return self.config(params)
   }
 
-  config(params?: ApiConfig): ApiConfig
-  {
-    return params ? params : {
-      serialize: true,
-      model: this.model()
-    }
+  config(params?: ApiConfig): ApiConfig {
+    return params
+      ? params
+      : {
+          serialize: true,
+          model: this.model()
+        }
   }
 
-  static async get<T>(payload?: Partial<T>): Promise<IApiResponse<T[]>>
-  {
+  static async get<T>(payload?: Partial<T>): Promise<IApiResponse<T[]>> {
     const self = new this()
     return await self.get(payload)
   }
 
-  get<T>(): Promise<IApiResponse<T[]>>
-  {
+  get<T>(): Promise<IApiResponse<T[]>> {
     const url = _join([this.apiPrefix(), this.resource()], '/')
 
     const queryString = this.queryString()
@@ -64,7 +58,7 @@ export default abstract class Api extends ApiQuery {
       http
         .get(url, {
           params: queryString,
-          transformResponse: [(data: any) => this.transformResponse(data)],
+          transformResponse: [(data: any) => this.transformResponse(data)]
         })
         .then((response: { data: any }) => {
           this.fetched(response.data)
@@ -86,15 +80,14 @@ export default abstract class Api extends ApiQuery {
    * @param { number } id - Model ID
    * @return { Promise<any> } The data from the API
    */
-  static show<T>(id: number): Promise<IApiResponse<T>>
-  {
+  static show<T>(id: number): Promise<IApiResponse<T>> {
     const self = new this()
     const url = _join([self.apiPrefix(), self.resource(), id], '/')
     self.retrieving(id)
     return new Promise((resolve, reject) => {
       http
         .get(url, {
-          transformResponse: [(data: any) => self.transformResponse(data)],
+          transformResponse: [(data: any) => self.transformResponse(data)]
         })
         .then((response: { data: any }) => {
           self.retrieved(response.data)
@@ -107,66 +100,91 @@ export default abstract class Api extends ApiQuery {
     })
   }
 
-  protected transformResponse(response: string): any
-  {
+  protected transformResponse(response: string): any {
     const resp = JSON.parse(response)
     resp.data = serializeModel(resp.data, this.model())
 
     return resp
   }
 
-
-
-
-
   /**
    * Fetching runs before get method
    * @param { any } payload Payload
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected fetching(payload?: any): void { return }
+  protected fetching(payload?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected fetchingError(err?: any): void { return }
+  protected fetchingError(err?: any): void {
+    return
+  }
   /**
    * Fetched runs after get method
    * @param { any } payload Payload
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected fetched(payload?: any): void { return }
+  protected fetched(payload?: any): void {
+    return
+  }
 
   /**
    * Retrieving runs before show method
    * @param { any } payload Payload
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected retrieving(payload?: any): void { return }
+  protected retrieving(payload?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected retrievingError(err?: any): void { return }
+  protected retrievingError(err?: any): void {
+    return
+  }
   /**
    * Retrieved runs after show method
    * @param { any } payload Payload
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected retrieved(payload?: any): void { return }
+  protected retrieved(payload?: any): void {
+    return
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected storing(payload?: any): void { return }
+  protected storing(payload?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected storingError(err?: any): void { return }
+  protected storingError(err?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected stored(payload?: any): void { return }
+  protected stored(payload?: any): void {
+    return
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected updating(payload?: any): void { return }
+  protected updating(payload?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected updatingError(err?: any): void { return }
+  protected updatingError(err?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected updated(payload?: any): void { return }
+  protected updated(payload?: any): void {
+    return
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected destroying(payload?: any): void { return }
+  protected destroying(payload?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected destroyingError(err?: any): void { return }
+  protected destroyingError(err?: any): void {
+    return
+  }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected destroyed(payload?: any): void { return }
+  protected destroyed(payload?: any): void {
+    return
+  }
 }

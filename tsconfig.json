@@ -14,10 +14,17 @@
   "emitDeclarationOnly": true,
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "baseUrl": ".",
-    "types": ["@types/lodash"],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "types": [
+      "@types/lodash"
+    ],
     "lib": [
       "esnext",
       "dom"
@@ -32,5 +39,10 @@
     "test/**/*.ts",
     "*.ts"
   ],
-  "exclude": ["node_modules", ".vscode", "public", "*.js"]
+  "exclude": [
+    "node_modules",
+    ".vscode",
+    "public",
+    "*.js"
+  ]
 }

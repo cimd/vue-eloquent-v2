@@ -6,7 +6,7 @@ describe('model api', () => {
   it('get', async () => {
     const post = await PostApi.get()
 
-    expect(post.data[ 0 ]).toBeInstanceOf(Post)
+    expect(post.data[0]).toBeInstanceOf(Post)
   })
 
   it('show', async () => {

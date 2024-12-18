@@ -7,10 +7,7 @@ const target = {
   created_at: '2022-06-30T06:01:43.000000Z',
   due_date: '2022-07-30T06:01:43.000000Z'
 }
-const elementsArray = [
-  'created_at',
-  'due_date'
-]
+const elementsArray = ['created_at', 'due_date']
 
 describe('Format Dates string to Object', async () => {
   it('format dates', async () => {
