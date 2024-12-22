@@ -34,9 +34,9 @@ describe('Format Object', async () => {
 
   it('format array dates', async () => {
     const result = formatObject(targetArray, elementsArray)
-    expect(typeof result[0].id).toBe('number')
-    expect(typeof result[0].string_date).toBe('string')
-    expect(typeof result[0].created_at).toBe('object')
-    expect(typeof result[0].due_date).toBe('object')
+    expect(typeof result[ 0 ].id).toBe('number')
+    expect(typeof result[ 0 ].string_date).toBe('string')
+    expect(typeof result[ 0 ].created_at).toBe('object')
+    expect(typeof result[ 0 ].due_date).toBe('object')
   })
 })

@@ -3,9 +3,9 @@ export default abstract class Model<T> {
     for (const key in model) {
       if (Object.prototype.hasOwnProperty.call(model, key)) {
         if (this.hasCast(key)) {
-          this[key] = this.castTo(this.getCast(key), key, model[key])
+          this[ key ] = this.castTo(this.getCast(key), key, model[ key ])
         } else {
-          this[key] = model[key]
+          this[ key ] = model[ key ]
         }
       }
     }
@@ -27,17 +27,17 @@ export default abstract class Model<T> {
   private getCast(key: string) {
     if (!this.hasCast(key)) return
 
-    return this.casts()[key]
+    return this.casts()[ key ]
   }
 
   protected castTo(cast: string, key: string, value: any) {
     switch (cast) {
-      case 'date':
-        return new Date(value)
-      case 'number':
-        return Number(value)
-      default:
-        return cast(this, key, value, this.casts())
+    case 'date':
+      return new Date(value)
+    case 'number':
+      return Number(value)
+    default:
+      return cast(this, key, value, this.casts())
     }
   }
 }

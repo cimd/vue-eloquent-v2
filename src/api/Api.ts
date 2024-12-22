@@ -38,9 +38,9 @@ export default abstract class Api extends ApiQuery {
     return params
       ? params
       : {
-          serialize: true,
-          model: this.model()
-        }
+        serialize: true,
+        model: this.model()
+      }
   }
 
   static async get<T>(payload?: Partial<T>): Promise<IApiResponse<T[]>> {

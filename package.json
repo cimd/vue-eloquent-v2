@@ -1,6 +1,6 @@
 {
   "name": "@konnec/vue-eloquent-v2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -9,22 +9,19 @@
     "test:unit:coverage": "vitest run --coverage.enabled=true --coverage.reporter=html",
     "test:unit:ui": "vitest --ui --coverage.enabled=true --api 9527",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/ test/"
+    "type-check": "vue-tsc -p tsconfig.json --composite false",
+    "lint": "eslint -c ./eslint.config.js --fix \"./src*/**/*.{ts,js,cjs,mjs,vue}\""
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "axios": "^1.7.9",
-    "laravel-echo": "^1.17.1",
     "lodash": "^4.17.21",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
-    "@rushstack/eslint-patch": "^1.10.4",
     "@stylistic/eslint-plugin-js": "^2.12.1",
     "@types/jsdom": "^21.1.7",
     "@types/lodash": "^4.17.13",
@@ -33,53 +30,43 @@
     "@typescript-eslint/parser": "^8.18.1",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitest/coverage-istanbul": "^2.1.8",
-    "@vitest/eslint-plugin": "^1.1.18",
+    "@vitest/eslint-plugin": "^1.1.20",
     "@vitest/ui": "^2.1.8",
     "@vue/devtools-api": "^7.6.8",
-    "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.1.4",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
-    "dotenv": "^16.4.7",
     "eslint": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "eslint-plugin-vue": "^9.32.0",
-    "globals": "^15.13.0",
+    "globals": "^15.14.0",
     "jsdom": "^25.0.1",
     "msw": "^2.7.0",
     "npm-run-all": "^4.1.5",
-    "pinia": "^2.3.0",
-    "prettier": "^3.4.2",
-    "pusher-js": "^8.3.0",
-    "pusher-js-mock": "^0.3.8",
     "typescript": "^5.7.2",
-    "vite": "^6.0.3",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.4.0",
     "vitest": "^2.1.8",
     "vue": "^3.5.13",
     "vue-tsc": "^2.1.10"
   },
-  "resolutions": {
-    "strip-ansi": "6.0.1",
-    "string-width": "4.2.2",
-    "wrap-ansi": "7.0.0"
-  },
   "description": "An interface for Vue and Laravel Eloquent through API",
-  "main": "./src/index.ts",
   "type": "module",
-  "module": "./src/index.ts",
-  "types": "./src/index.d.ts",
+  "main": "./dist/vue-eloquent-v2.umd.cjs",
+  "module": "./dist/vue-eloquent-v2.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
-      "import": "./src/index.ts",
-      "require": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vue-eloquent-v2.js",
+      "require": "./dist/vue-eloquent-v2.umd.cjs"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/cimd/vue-eloquent.git"
+    "url": "git+ssh://git@github.com/cimd/vue-eloquent-v2.git"
   },
   "keywords": [
     "Vue",
@@ -97,7 +84,7 @@
   "author": "Christian D'Aquino",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cimd/vue-eloquent/issues"
+    "url": "https://github.com/cimd/vue-eloquent-v2/issues"
   },
   "homepage": "https://vue-eloquent.netlify.app"
 }
