@@ -1,8 +1,14 @@
 import { fileURLToPath } from 'node:url'
-import { defineConfig, configDefaults } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
+import vue from '@vitejs/plugin-vue'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 /// <reference types="vitest/config" />
 export default defineConfig({
+  plugins: [
+    vue(),
+    tsconfigPaths(),
+  ],
   test: {
     environment: 'jsdom',
     globals: true,
@@ -16,5 +22,5 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       // reportsDirectory: './tests/unit/coverage'
     },
-  }
+  },
 })
