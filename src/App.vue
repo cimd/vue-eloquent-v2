@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import TestModel from '@/model/TestModel'
+import UserModel from '@/model/UserModel'
 
 export default defineComponent({
   setup() {
     return {
-      post: new TestModel(),
+      user: new UserModel(),
     }
   },
   data() {
@@ -13,20 +13,20 @@ export default defineComponent({
   },
   methods: {
     onCreate(){
-      console.log('Created Model: ', this.post)
+      console.log('Created Model: ', this.user)
       const model = {
         id: 2,
         name: 'Carla',
       }
-      this.post.create(model)
+      this.user.create(model)
     },
     onView(){
-      console.log('Model: ', this.post)
+      console.log('Model: ', this.user)
     },
     onUpdate(){
-      this.post.id = 3
-      this.post.name = 'Ingo'
-      console.log('Updated Model: ', this.post)
+      this.user.id = 3
+      this.user.name = 'Ingo'
+      console.log('Updated Model: ', this.user)
     }
   }
 })
@@ -36,21 +36,21 @@ export default defineComponent({
   <header />
   <div>
     <h1>Reactive Attributes</h1>
-    <input v-model='post.attributes.id' type='text'>
+    <input v-model='user.attributes.id' type='text'>
     <br>
-    <input v-model='post.attributes.name' type='text'>
+    <input v-model='user.attributes.name' type='text'>
     <br>
-    <p>id: {{ post.attributes.id }} | name: {{ post.attributes.name }}</p>
+    <p>id: {{ user.attributes.id }} | name: {{ user.attributes.name }}</p>
     <br>
   </div>
 
   <div>
     <h1>Class Properties</h1>
-    <input v-model='post.id' type='text'>
+    <input v-model='user.id' type='text'>
     <br>
-    <input v-model='post.name' type='text'>
+    <input v-model='user.name' type='text'>
     <br>
-    <p>id: {{ post.id }} | name: {{ post.name }}</p>
+    <p>id: {{ user.id }} | name: {{ user.name }}</p>
     <br>
   </div>
 

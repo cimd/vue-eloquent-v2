@@ -27,4 +27,6 @@ export default abstract class BaseModel {
       })
     }
   }
+
+  abstract resource(): void
 }

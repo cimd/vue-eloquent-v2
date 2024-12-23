@@ -1,11 +1,15 @@
 import BaseModel from '@/model/BaseModel'
 
-export default class TestModel extends BaseModel {
+export default class UserModel extends BaseModel {
   id = 1
   name = 'Heitor'
 
   constructor(model?: { id: number; name: string }) {
     super()
     super.create(model)
+  }
+
+  resource() {
+    return 'users'
   }
 }
