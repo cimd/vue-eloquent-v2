@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import UserModel from '@/model/UserModel'
+import UserModel from '../examples/UserModel'
 // import show from '@/Api/show'
-import createExampleHttp from '@/http/exampleHttp'
+import createExampleHttp from '../examples/exampleHttp'
 
 export default defineComponent({
   setup() {

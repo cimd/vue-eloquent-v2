@@ -1,4 +1,4 @@
-import BaseModel from '@/model/BaseModel'
+import BaseModel from '../src/model/BaseModel'
 
 export default class UserModel extends BaseModel {
   id = 1

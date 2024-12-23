@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import TestModel from '@/model/UserModel'
+import TestModel from '../../../examples/UserModel'
 
 const model = {
   id: 1,

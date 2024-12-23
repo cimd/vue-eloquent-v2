@@ -1,7 +1,7 @@
 import BaseModel from '@/model/BaseModel'
-import TestModel from '@/model/UserModel'
+import { createHttp } from '@/http/http'
 
 export {
-  BaseModel,
-  TestModel
+  createHttp,
+  BaseModel
 }
