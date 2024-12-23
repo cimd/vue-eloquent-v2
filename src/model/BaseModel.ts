@@ -1,39 +1,30 @@
 import { reactive } from 'vue'
 
 export default abstract class BaseModel {
-  attributes = reactive({
-    id: 0,
-    name: ''
-  })
+  attributes: any
 
   protected constructor() {
     Object.defineProperty(this, 'attributes', {
-      // value: reactive({}),
-      writable: false,
+      value: reactive({}),
+      writable: true,
       configurable: false,
       enumerable: false
     })
   }
 
-  protected factory(model: any) {
-    for (const key in model) {
-      if (Object.prototype.hasOwnProperty.call(model, key)) {
+  create(model?: any) {
+    const iterable = model ?? this
+    for (const key in iterable) {
+      this.attributes[ key ] = iterable[ key ]
 
-        this.attributes[ key ] = model[ key ]
-        this[ key ] = this.attributes[ key ]
-      }
+      Object.defineProperty(this, key, {
+        get() {
+          return this.attributes[ key ]
+        },
+        set(newVal: any) {
+          this.attributes[ key ] = newVal
+        }
+      })
     }
-  }
-
-  get(target, name, receiver) {
-    console.log('getter')
-    console.log(target, name, receiver)
-    return 'abc'
-  }
-
-  set [ 'attribute' ](val: any) {
-    console.log('setter')
-    console.log('set', ['attribute'], val)
-    return this.attributes[ ['attribute'] ] = val
   }
 }

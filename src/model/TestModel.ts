@@ -6,6 +6,6 @@ export default class TestModel extends BaseModel {
 
   constructor(model?: { id: number; name: string }) {
     super()
-    if (model) this.factory(model)
+    super.create(model)
   }
 }
