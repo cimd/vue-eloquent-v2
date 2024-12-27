@@ -21,7 +21,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'VueEloquent'
+      name: 'VueEloquentV2'
     },
     sourcemap: true,
     rollupOptions: {

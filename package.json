@@ -55,6 +55,9 @@
   },
   "description": "An interface for Vue and Laravel Eloquent through API",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vue-eloquent-v2.umd.cjs",
   "module": "./dist/vue-eloquent-v2.js",
   "types": "./dist/index.d.ts",
