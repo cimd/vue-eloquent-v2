@@ -25,7 +25,14 @@ export default abstract class BaseModel {
           return this.attributes[ key ]
         },
         set(newVal: any) {
-          this.attributes[ key ] = newVal
+          // this.attributes[ key ] = newVal
+
+          if (this.hasCast(key)) {
+            console.log('hasCast: ', key, this.hasCast(key))
+            this.attributes[ key ] = this.castTo(this.getCast(key), key, newVal)
+          } else {
+            this.attributes[ key ] = newVal
+          }
         }
       })
     }
@@ -39,7 +46,8 @@ export default abstract class BaseModel {
         apiPrefix: apiPrefix,
         resource: this.resource()
       })
-      console.log('find: ', result.data)
+      // console.log('find: ', result.data)
+      console.log('this: ', this)
       this.create(result.data)
 
       return result.data
@@ -60,6 +68,37 @@ export default abstract class BaseModel {
       return result.data
     } catch (err) {
       console.error(err)
+    }
+  }
+
+
+  protected casts() {
+    return {
+      created_at: 'date',
+      updated_at: 'date',
+      deleted_at: 'date'
+    }
+  }
+
+  private hasCast(key: string) {
+    console.log('hasCast: ', key, Object.prototype.hasOwnProperty.call(this.casts(), key))
+    return Object.prototype.hasOwnProperty.call(this.casts(), key)
+  }
+
+  private getCast(key: string): any {
+    if (!this.hasCast(key)) return
+
+    return this.casts()[ key ]
+  }
+
+  protected castTo(cast: string, key: string, value: any) {
+    switch (cast) {
+    case 'date':
+      return new Date(value)
+    case 'number':
+      return Number(value)
+    default:
+      return cast(this, key, value, this.casts())
     }
   }
 }
